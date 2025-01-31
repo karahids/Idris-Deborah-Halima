@@ -2,9 +2,14 @@ document.getElementById("contactForm").addEventListener("submit", function(event
   event.preventDefault();
   
   const formData = new FormData(this);
+  const formDataString = new URLSearchParams(formData).toString(); // Convert FormData to a string
+  
   fetch('your-server-endpoint', {
       method: 'POST',
-      body: formData // Automatically formats the body as multipart form-data
+      headers: {
+          'Content-Type': 'application/x-www-form-urlencoded' // Specify content type for URL encoded data
+      },
+      body: formDataString // Sending the stringified form data
   })
   .then(response => response.json())
   .then(data => {
