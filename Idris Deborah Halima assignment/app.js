@@ -1,1 +1,15 @@
-// Simple form submission message document.getElementById("contactForm").addEventListener("submit", function(event) { event.preventDefault(); alert("Thank you for your message! I'll get back to you soon."); document.getElementById("contactForm").reset(); });
+// Toggle mobile menu
+document.addEventListener("DOMContentLoaded", function() {
+  const menuButton = document.createElement('button');
+  menuButton.textContent = "☰"; // Hamburger icon
+  menuButton.classList.add('menu-btn');
+  const navbar = document.querySelector('.navbar');
+  navbar.appendChild(menuButton);
+
+  const navLinks = document.querySelectorAll('.navbar a');
+  menuButton.addEventListener('click', function() {
+      navLinks.forEach(link => {
+          link.classList.toggle('show');
+      });
+  });
+});
