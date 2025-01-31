@@ -1,3 +1,4 @@
+const codeString = `
 document.addEventListener("DOMContentLoaded", function() {
   document.getElementById("contactForm").addEventListener("submit", function(event) {
     event.preventDefault();
@@ -5,4 +6,9 @@ document.addEventListener("DOMContentLoaded", function() {
     document.getElementById("contactForm").reset();
   });
 });
+`;
+
+const jsonString = JSON.stringify(codeString);
+
+console.log(jsonString);
 
