@@ -24,15 +24,21 @@ document.addEventListener("DOMContentLoaded", function() {
   const projectList = document.getElementById('project-list');
 
   projects.forEach(project => {
-      // Ensure both the title and description are explicitly strings
-      const title = project.title ? String(project.title) : "";
-      const description = project.description ? String(project.description) : "";
+      // Sanitize: Ensure the title and description are both strings
+      const title = (typeof project.title === 'string' && project.title) ? project.title : '';
+      const description = (typeof project.description === 'string' && project.description) ? project.description : '';
 
-      // Log the values to ensure they are strings
-      console.log("Project title:", title);
-      console.log("Project description:", description);
+      // Log to verify the types and values of the title and description
+      console.log("Title:", title, "Type:", typeof title);
+      console.log("Description:", description, "Type:", typeof description);
 
-      // Insert the values as strings into the HTML
+      // If the title or description isn't a string, we can't insert it
+      if (typeof title !== 'string' || typeof description !== 'string') {
+          console.error('Error: Non-string values detected in project:', project);
+          return;  // Skip this project if there's an issue
+      }
+
+      // Create a new div for the project and insert it as HTML content
       const projectDiv = document.createElement('div');
       projectDiv.classList.add('project');
       projectDiv.innerHTML = `
@@ -40,10 +46,7 @@ document.addEventListener("DOMContentLoaded", function() {
           <p>${description}</p>
       `;
 
-      // Check if innerHTML is valid
-      console.log("Generated HTML:", projectDiv.innerHTML);
-
-      // Append the project to the list
+      // Append the project to the project list
       projectList.appendChild(projectDiv);
   });
 });
