@@ -22,12 +22,21 @@ document.addEventListener("DOMContentLoaded", function() {
 
   // Create project elements dynamically and insert into the DOM
   const projectList = document.getElementById('project-list');
+  
   projects.forEach(project => {
+      // Ensure both the title and description are explicitly strings
+      const title = String(project.title);  // Convert to string just in case
+      const description = String(project.description);  // Convert to string just in case
+
+      // Log to console to check the values
+      console.log("Project title:", title);
+      console.log("Project description:", description);
+
       const projectDiv = document.createElement('div');
       projectDiv.classList.add('project');
       projectDiv.innerHTML = `
-          <h3>${project.title}</h3>
-          <p>${project.description}</p>
+          <h3>${title}</h3>
+          <p>${description}</p>
       `;
       projectList.appendChild(projectDiv);
   });
